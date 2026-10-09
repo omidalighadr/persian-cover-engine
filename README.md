@@ -61,13 +61,13 @@ from persian_cover import CoverSpec, plan, render
 spec = CoverSpec(
     title="چطور با هوش مصنوعی مقاله بنویسیم؟",
     subtitle="راهنمای گام‌به‌گام",
-    highlight="هوش",         # drawn in the accent colour
-    size="story",            # post | square | story | wide
-    palette="teal",          # midnight | teal | ivory | graphite
+    highlight="هوش",  # drawn in the accent colour
+    size="story",  # post | square | story | wide
+    palette="teal",  # midnight | teal | ivory | graphite
 )
 render(spec).save("cover.png")
 
-layout = plan(spec)          # inspect where everything goes without drawing
+layout = plan(spec)  # inspect where everything goes without drawing
 print(layout.safe, [line.box for line in layout.title])
 ```
 
