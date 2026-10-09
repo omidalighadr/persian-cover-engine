@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "persian-cover-engine"
+version = "0.1.0"
+description = "Render Persian (RTL) cover images with correct shaping, WCAG-checked palettes and Instagram-grid-safe layout."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Omid Alighadr" }]
+dependencies = ["Pillow>=10.1"]
+
+[project.optional-dependencies]
+fallback-shaping = ["arabic-reshaper>=3.0", "python-bidi>=0.4.2"]
+dev = ["pytest>=8", "ruff>=0.5", "mypy>=1.10"]
+
+[project.scripts]
+persian-cover = "persian_cover.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+persian_cover = ["fonts/*.ttf", "fonts/OFL.txt", "py.typed"]
+
+[tool.ruff]
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+files = ["src"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
