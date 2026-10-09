@@ -30,7 +30,9 @@ def _colorize(mask: Image.Image, edge: RGB, center: RGB, saturate_at: float) -> 
 
 def radial(width: int, height: int, edge: RGB, center: RGB) -> Image.Image:
     """Soft vignette: ``center`` in the middle fading to ``edge`` towards the rim."""
-    base = Image.radial_gradient("L").resize((int(width * 1.5), int(height * 1.5)), Image.BICUBIC)
+    base = Image.radial_gradient("L").resize(
+        (int(width * 1.5), int(height * 1.5)), Image.Resampling.BICUBIC
+    )
     x0, y0 = (base.width - width) // 2, (base.height - height) // 2
     mask = base.crop((x0, y0, x0 + width, y0 + height))
     return _colorize(mask, edge, center, _RADIAL_RIM_VALUE)
@@ -38,7 +40,7 @@ def radial(width: int, height: int, edge: RGB, center: RGB) -> Image.Image:
 
 def linear(width: int, height: int, edge: RGB, center: RGB) -> Image.Image:
     """Diagonal gradient: ``edge`` at the top-left corner, ``center`` at the bottom-right."""
-    vertical = Image.linear_gradient("L").resize((width, height), Image.BICUBIC)
+    vertical = Image.linear_gradient("L").resize((width, height), Image.Resampling.BICUBIC)
     horizontal = (
         Image.linear_gradient("L").transpose(Image.Transpose.ROTATE_90).resize((width, height))
     )

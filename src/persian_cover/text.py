@@ -8,6 +8,7 @@ from collections.abc import Callable
 from dataclasses import dataclass
 from functools import lru_cache
 from pathlib import Path
+from typing import Any
 
 from PIL import ImageFont, features
 
@@ -60,7 +61,7 @@ def prepare(text: str) -> str:
     return str(get_display(arabic_reshaper.reshape(text)))
 
 
-def layout_kwargs(text: str) -> dict[str, str]:
+def layout_kwargs(text: str) -> dict[str, Any]:
     """Extra arguments for Pillow's text functions. Only raqm understands them."""
     if shaping_backend() != "raqm":
         return {}
