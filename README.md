@@ -75,7 +75,7 @@ print(layout.safe, [line.box for line in layout.title])
 
 ```bash
 docker build -t persian-cover-engine .
-docker run --rm -v "$PWD:/out" persian-cover-engine "سلام دنیا" --out /out/cover.png
+docker run --rm --user "$(id -u):$(id -g)" -v "$PWD:/out" persian-cover-engine "سلام دنیا" --out /out/cover.png
 ```
 
 ## Design notes

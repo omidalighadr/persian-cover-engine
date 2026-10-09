@@ -48,5 +48,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: docker build -t persian-cover-engine .
-      - run: docker run --rm -v "$PWD/out:/out" persian-cover-engine "سلام دنیا" --out /out/cover.png
+      - run: mkdir out
+      - run: >
+          docker run --rm --user "$(id -u):$(id -g)" -v "$PWD/out:/out"
+          persian-cover-engine "سلام دنیا" --out /out/cover.png
       - run: test -s out/cover.png
